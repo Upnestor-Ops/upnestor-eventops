@@ -6,135 +6,179 @@
   <title>UpNestor EventOps AI — Speaker & Program Lifecycle Engine</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Cabinet+Grotesk:wght@800;900&display=swap" rel="stylesheet">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
     body { font-family: 'Plus Jakarta Sans', sans-serif; }
-    .bg-grid { background-image: radial-gradient(rgba(99, 102, 241, 0.08) 1px, transparent 1px); background-size: 24px 24px; }
+    .font-display { font-family: 'Cabinet Grotesk', sans-serif; }
+    
+    /* Vibrant Electric Blue & Pure White Theme (Inspired by the Azul aesthetic) */
+    .bg-electric-mesh {
+      background: linear-gradient(135deg, #021B79 0%, #0575E6 45%, #00F2FE 100%);
+      background-attachment: fixed;
+    }
+    .glass-nav {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 20px 45px -15px rgba(2, 27, 121, 0.22);
+    }
+    .glass-banner {
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+    }
   </style>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col bg-grid">
+<body class="bg-electric-mesh text-slate-800 antialiased min-h-screen flex flex-col justify-between">
 
-  <!-- TOP BRANDING BAR -->
-  <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-      <div class="flex items-center space-x-3">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-700 to-purple-600 flex items-center justify-center text-white font-black shadow-md shadow-indigo-100">
+  <!-- ========================================== -->
+  <!-- TOP BRANDING & NAVIGATION BAR (GLASS)      -->
+  <!-- ========================================== -->
+  <header class="glass-nav sticky top-0 z-50 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Logo & Studio Identity -->
+      <div class="flex items-center space-x-3.5">
+        <div class="w-12 h-12 rounded-2xl bg-blue-600 text-white flex items-center justify-center font-black text-2xl shadow-lg shadow-blue-500/30 font-display">
           UN
         </div>
         <div>
           <div class="flex items-center space-x-2">
-            <span class="font-bold text-lg text-slate-900 tracking-tight">UpNestor Studio</span>
-            <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200">EventOps AI</span>
+            <span class="font-extrabold text-xl text-slate-900 tracking-tight font-display">UpNestor Studio</span>
+            <span class="text-[11px] font-black px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200 uppercase tracking-wider">EventOps AI</span>
           </div>
-          <p class="text-xs text-slate-500">Program & Speaker Operations • Powered by Joy Okoyie</p>
+          <div class="flex items-center space-x-2 text-xs text-slate-500">
+            <span>TTI Summit 2026</span>
+            <span>•</span>
+            <span class="text-blue-600 font-semibold flex items-center"><i data-lucide="clock" class="w-3.5 h-3.5 mr-1"></i> <span id="wat-clock">WAT Clock</span></span>
+          </div>
         </div>
       </div>
 
-      <!-- NAVIGATION TABS -->
-      <nav class="flex items-center space-x-1 sm:space-x-2 bg-slate-100 p-1 rounded-xl text-xs sm:text-sm font-medium">
-        <button onclick="switchTab('pm-view')" id="tab-pm" class="tab-btn px-3.5 py-1.5 rounded-lg bg-white text-indigo-700 font-semibold shadow-sm transition">
+      <!-- Navigation Tabs (Only Blue & White) -->
+      <nav class="hidden md:flex items-center space-x-1.5 bg-blue-50/80 p-1.5 rounded-2xl border border-blue-100 text-xs font-bold">
+        <button onclick="switchTab('pm-view')" id="tab-pm" class="tab-btn px-4 py-2 rounded-xl bg-blue-600 text-white shadow-md shadow-blue-500/20 transition">
           PM Command Center
         </button>
-        <button onclick="switchTab('speaker-view')" id="tab-speaker" class="tab-btn px-3.5 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition">
-          Speaker Onboarding Link
+        <button onclick="switchTab('cards-view')" id="tab-cards" class="tab-btn px-4 py-2 rounded-xl text-blue-900 hover:text-blue-600 transition">
+          Speaker Grid
         </button>
-        <button onclick="switchTab('designer-view')" id="tab-designer" class="tab-btn px-3.5 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition">
-          Media & AI Proofreader
+        <button onclick="switchTab('designer-view')" id="tab-designer" class="tab-btn px-4 py-2 rounded-xl text-blue-900 hover:text-blue-600 transition">
+          AI Flyer Inspector
         </button>
-        <button onclick="switchTab('dayof-view')" id="tab-dayof" class="tab-btn px-3.5 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition">
-          Day-of-Event Live Tracker
+        <button onclick="switchTab('radar-view')" id="tab-radar" class="tab-btn px-4 py-2 rounded-xl text-blue-900 hover:text-blue-600 transition">
+          Live Day-Of Radar
         </button>
       </nav>
+
+      <!-- Quick Action / Speaker Link Generator -->
+      <div class="flex items-center space-x-3">
+        <a href="speaker.html" target="_blank" class="px-4 py-2.5 bg-white hover:bg-blue-50 text-blue-700 font-bold rounded-xl text-xs border border-blue-200 shadow-sm transition flex items-center">
+          <i data-lucide="external-link" class="w-3.5 h-3.5 mr-1.5"></i> Joy's Onboarding Link
+        </a>
+      </div>
+
     </div>
   </header>
 
   <!-- MAIN CONTAINER -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full">
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full space-y-8">
 
     <!-- ========================================== -->
     <!-- 1. PM COMMAND CENTER (DEFAULT VIEW)        -->
     <!-- ========================================== -->
     <div id="view-pm-view" class="view-panel space-y-6">
       
-      <!-- Event Hero Card -->
-      <div class="bg-gradient-to-r from-indigo-900 via-indigo-800 to-purple-900 rounded-2xl p-6 sm:p-8 text-white shadow-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-        <div class="space-y-2">
-          <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-white/10 text-indigo-200 text-xs font-semibold backdrop-blur-md">
-            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span>Active Program: TTI Summit 2026</span>
+      <!-- Event Hero Banner (Electric Blue Glass) -->
+      <div class="glass-banner rounded-3xl p-6 sm:p-10 text-white shadow-2xl flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+        <div class="space-y-3">
+          <div class="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-white/15 text-white text-xs font-extrabold backdrop-blur-md border border-white/20">
+            <span class="w-2.5 h-2.5 rounded-full bg-cyan-300 animate-ping"></span>
+            <span>FLAGSHIP PROGRAM • TEEN THINK INNOVATION 2026</span>
           </div>
-          <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight">Teen Think Innovation (TTI) Summit</h1>
-          <p class="text-indigo-200 text-sm max-w-2xl">
-            Career Sensitization & Emerging Tech Pathways for Teens, Youths and Students. Automating speaker communications, media asset design verifications, and day-of attendance.
+          <h1 class="text-3xl sm:text-4xl font-black tracking-tight font-display">
+            TTI Summit Speaker & Lifecycle Engine
+          </h1>
+          <p class="text-blue-100 text-sm max-w-2xl font-medium leading-relaxed">
+            Eliminating speaker dropouts, design bottlenecks, and stage-time anxiety through autonomous intake, AI multimodal proofreading, and 60-minute arrival verification.
           </p>
-          <div class="flex flex-wrap gap-4 pt-2 text-xs text-indigo-100">
-            <span class="flex items-center"><i data-lucide="calendar" class="w-4 h-4 mr-1.5 text-indigo-300"></i> Oct 30–31, 2026</span>
-            <span class="flex items-center"><i data-lucide="map-pin" class="w-4 h-4 mr-1.5 text-indigo-300"></i> VIP Event Centre, Enugu</span>
-            <span class="flex items-center"><i data-lucide="users" class="w-4 h-4 mr-1.5 text-indigo-300"></i> 12 Target Speakers</span>
+          <div class="flex flex-wrap gap-5 pt-2 text-xs font-semibold text-white/90">
+            <span class="flex items-center"><i data-lucide="calendar" class="w-4 h-4 mr-1.5 text-cyan-300"></i> Oct 30–31, 2026</span>
+            <span class="flex items-center"><i data-lucide="map-pin" class="w-4 h-4 mr-1.5 text-cyan-300"></i> VIP Event Centre, Enugu</span>
+            <span class="flex items-center"><i data-lucide="users" class="w-4 h-4 mr-1.5 text-cyan-300"></i> UpNestor Studio Management</span>
           </div>
         </div>
         
         <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
-          <button onclick="triggerQuickInvite()" class="px-4 py-2.5 bg-indigo-500 hover:bg-indigo-400 text-white font-semibold rounded-xl text-xs sm:text-sm shadow-md transition flex items-center justify-center">
-            <i data-lucide="send" class="w-4 h-4 mr-2"></i> + Invite New Speaker
+          <button onclick="triggerQuickInvite()" class="px-5 py-3 bg-white hover:bg-blue-50 text-blue-700 font-extrabold rounded-2xl text-xs sm:text-sm shadow-xl transition flex items-center justify-center font-display">
+            <i data-lucide="user-plus" class="w-4 h-4 mr-2"></i> + Invite New Speaker
           </button>
-          <button onclick="testCutePingDemo()" class="px-4 py-2.5 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-xl text-xs sm:text-sm border border-white/20 transition flex items-center justify-center">
-            <i data-lucide="bell-ring" class="w-4 h-4 mr-2 text-yellow-300"></i> Test 1-Hr Cute Ping
+          <button onclick="testCutePingDemo()" class="px-5 py-3 bg-blue-600/60 hover:bg-blue-600 text-white font-extrabold rounded-2xl text-xs sm:text-sm border border-white/30 backdrop-blur-md shadow-xl transition flex items-center justify-center font-display">
+            <i data-lucide="bell" class="w-4 h-4 mr-2 text-cyan-300"></i> Test 1-Hr Cute Ping
           </button>
         </div>
       </div>
 
-      <!-- Quick Metrics -->
+      <!-- Quick Metrics Cards (Blue & White Glass) -->
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
-          <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Speakers Invited</div>
-          <div class="text-2xl font-black text-slate-900 mt-1" id="metric-invited">3</div>
-          <div class="text-xs text-slate-500 mt-1 flex items-center"><i data-lucide="check" class="w-3.5 h-3.5 text-emerald-500 mr-1"></i> Active Pipeline</div>
+        <div class="glass-card p-5 rounded-2xl">
+          <div class="text-xs font-extrabold text-blue-600 uppercase tracking-widest">Speakers Invited</div>
+          <div class="text-3xl font-black text-slate-900 mt-2 font-display" id="metric-invited">3</div>
+          <div class="text-xs text-slate-500 font-semibold mt-1">Active Pipeline</div>
         </div>
-        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
-          <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Confirmed & Bio Received</div>
-          <div class="text-2xl font-black text-indigo-600 mt-1" id="metric-confirmed">2</div>
-          <div class="text-xs text-indigo-600 font-medium mt-1">Ready for Media team</div>
+        <div class="glass-card p-5 rounded-2xl">
+          <div class="text-xs font-extrabold text-blue-600 uppercase tracking-widest">Confirmed & Bio Received</div>
+          <div class="text-3xl font-black text-blue-600 mt-2 font-display" id="metric-confirmed">2</div>
+          <div class="text-xs text-blue-600 font-semibold mt-1">Ready for Media team</div>
         </div>
-        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
-          <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Flyers AI-Verified</div>
-          <div class="text-2xl font-black text-purple-600 mt-1" id="metric-verified">1</div>
-          <div class="text-xs text-purple-600 font-medium mt-1">0 typos detected</div>
+        <div class="glass-card p-5 rounded-2xl">
+          <div class="text-xs font-extrabold text-blue-600 uppercase tracking-widest">Flyers AI-Verified</div>
+          <div class="text-3xl font-black text-cyan-600 mt-2 font-display" id="metric-verified">1</div>
+          <div class="text-xs text-cyan-700 font-semibold mt-1">0 typos detected</div>
         </div>
-        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
-          <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Checked In on Day-Of</div>
-          <div class="text-2xl font-black text-emerald-600 mt-1" id="metric-checkedin">0</div>
-          <div class="text-xs text-emerald-600 font-medium mt-1">Live status active</div>
+        <div class="glass-card p-5 rounded-2xl">
+          <div class="text-xs font-extrabold text-blue-600 uppercase tracking-widest">Checked In on Day-Of</div>
+          <div class="text-3xl font-black text-blue-700 mt-2 font-display" id="metric-checkedin">0</div>
+          <div class="text-xs text-blue-600 font-semibold mt-1">Live status active</div>
         </div>
       </div>
 
-      <!-- Speaker Pipeline Table -->
-      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-        <div class="p-5 border-b border-slate-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+      <!-- Master Speaker Pipeline Table -->
+      <div class="glass-card rounded-3xl overflow-hidden">
+        <div class="p-6 border-b border-blue-50 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
-            <h2 class="text-base font-bold text-slate-900">Master Speaker & Program Lifecycle Board</h2>
-            <p class="text-xs text-slate-500">Live operational sync between Speakers, Media Designers, AI Quality Gate, and Social Dispatch.</p>
+            <h2 class="text-lg font-black text-slate-900 font-display">Master Speaker Lifecycle Tracker</h2>
+            <p class="text-xs text-slate-500 font-medium">Synchronized status across Speaker Submissions, Media Assets, AI Proofing, and Social Dispatch.</p>
           </div>
-          <div class="flex items-center space-x-2">
-            <span class="text-xs text-slate-500 font-medium">Auto-sync with Google Sheets</span>
-            <div class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></div>
-          </div>
+          <span class="text-xs font-bold px-3 py-1 rounded-full bg-blue-50 text-blue-700 border border-blue-200 flex items-center">
+            <span class="w-2 h-2 rounded-full bg-blue-600 mr-2 animate-ping"></span> Live System Ready
+          </span>
         </div>
 
         <div class="overflow-x-auto">
           <table class="w-full text-left text-xs sm:text-sm">
-            <thead class="bg-slate-50 text-slate-600 uppercase text-[11px] font-bold tracking-wider border-b border-slate-200">
+            <thead class="bg-blue-50/50 text-blue-900 uppercase text-[11px] font-black tracking-wider border-b border-blue-100">
               <tr>
-                <th class="py-3 px-4">Speaker & Session</th>
-                <th class="py-3 px-4">Date & Time</th>
-                <th class="py-3 px-4">Onboarding Status</th>
-                <th class="py-3 px-4">Media Flyer</th>
-                <th class="py-3 px-4">AI Proof Status</th>
-                <th class="py-3 px-4">Arrival Status</th>
-                <th class="py-3 px-4 text-right">Actions</th>
+                <th class="py-3.5 px-5">Speaker & Topic</th>
+                <th class="py-3.5 px-4">Date & Time</th>
+                <th class="py-3.5 px-4">Intake Status</th>
+                <th class="py-3.5 px-4">Flyer Asset</th>
+                <th class="py-3.5 px-4">AI Vision Gate</th>
+                <th class="py-3.5 px-4">Arrival Status</th>
+                <th class="py-3.5 px-5 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody id="speaker-table-body" class="divide-y divide-slate-100">
+            <tbody id="speaker-table-body" class="divide-y divide-blue-50">
               <!-- Rendered via JS -->
             </tbody>
           </table>
@@ -143,206 +187,121 @@
     </div>
 
     <!-- ========================================== -->
-    <!-- 2. SPEAKER ONBOARDING PORTAL (PUBLIC LINK) -->
+    <!-- 2. SPEAKER CARD GRID (VISUAL AVATARS)     -->
     <!-- ========================================== -->
-    <div id="view-speaker-view" class="view-panel hidden space-y-6 max-w-3xl mx-auto">
-      
-      <!-- Speaker Preview Header -->
-      <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
-        <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-4">
-          <div class="flex items-center space-x-2">
-            <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-purple-50 text-purple-700 border border-purple-200">Personal Speaker Invitation</span>
-            <span class="text-xs text-slate-400">• UpNestor Secure Link</span>
-          </div>
-          <span class="text-xs font-bold text-indigo-600">TTI Summit 2026</span>
-        </div>
-
-        <div class="space-y-2">
-          <h2 class="text-xl sm:text-2xl font-black text-slate-900">Welcome to Teen Think Innovation (TTI) Summit 2026!</h2>
-          <p class="text-xs sm:text-sm text-slate-600">
-            We are honored to have you speak to our vibrant cohort of teens, youths and students on emerging careers in technology and creative industries.
-          </p>
-        </div>
-
-        <!-- Assigned Session Details Card -->
-        <div class="bg-gradient-to-r from-slate-900 to-indigo-950 text-white rounded-xl p-5 my-5 shadow-inner space-y-3">
-          <div class="text-[11px] font-bold text-indigo-300 uppercase tracking-wider">Your Assigned Session Details</div>
-          <div class="text-lg font-bold text-white" id="sp-portal-topic">Topic: Breaking into Spatial AI & 3D Real-Time Systems</div>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-slate-300 pt-2 border-t border-white/10">
-            <div class="flex items-center"><i data-lucide="calendar" class="w-4 h-4 mr-2 text-indigo-400"></i> Date: <strong>October 30, 2026</strong></div>
-            <div class="flex items-center"><i data-lucide="clock" class="w-4 h-4 mr-2 text-indigo-400"></i> Time: <strong>11:00 AM – 11:45 AM (WAT)</strong></div>
-            <div class="flex items-center"><i data-lucide="map-pin" class="w-4 h-4 mr-2 text-indigo-400"></i> VIP Event Centre, Enugu</div>
-            <div>
-              <a href="https://maps.google.com/?q=VIP+Event+Centre+Enugu+Nigeria" target="_blank" class="inline-flex items-center text-xs font-semibold text-yellow-400 hover:text-yellow-300 underline">
-                <i data-lucide="navigation" class="w-3.5 h-3.5 mr-1"></i> Open Google Maps Directions
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Onboarding Form -->
-        <form id="speaker-confirmation-form" onsubmit="handleSpeakerSubmission(event)" class="space-y-4">
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Full Name (Exactly as it appears on flyer) *</label>
-              <input type="text" id="form-speaker-name" required value="Maryjane Edeh" class="w-full px-3.5 py-2 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:outline-none">
-            </div>
-            <div>
-              <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Professional Title / Current Role *</label>
-              <input type="text" id="form-speaker-title" required value="Multimodal & Spatial AI Specialist | Lead 3D Artist" class="w-full px-3.5 py-2 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:outline-none">
-            </div>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Email Address *</label>
-              <input type="email" id="form-speaker-email" required value="maryjanetony40@gmail.com" class="w-full px-3.5 py-2 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:outline-none">
-            </div>
-            <div>
-              <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Phone / WhatsApp (For Day-of cute ping) *</label>
-              <input type="tel" id="form-speaker-phone" required value="+234 906 340 4403" class="w-full px-3.5 py-2 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:outline-none">
-            </div>
-          </div>
-
+    <div id="view-cards-view" class="view-panel hidden space-y-6">
+      <div class="glass-card rounded-3xl p-6 sm:p-8">
+        <div class="border-b border-blue-50 pb-5 mb-6 flex justify-between items-center">
           <div>
-            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Short Speaker Bio (For event booklet & intro) *</label>
-            <textarea id="form-speaker-bio" rows="3" required class="w-full px-3.5 py-2 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:outline-none">Maryjane Edeh has 5+ years of production experience across real-time game engines (Blender, Unity, Unreal Engine 5) and commercial Steam credits on Bombernaut 67. Certified by Google Cloud in Vertex AI Prompt Design, she specializes in 3D spatial evaluation and next-gen multimodal pipelines.</textarea>
+            <h2 class="text-2xl font-black text-slate-900 font-display">TTI Summit Speaker Directory</h2>
+            <p class="text-xs text-slate-500 font-medium">Visual speaker cards with assigned session topics and media status.</p>
           </div>
+          <button onclick="triggerQuickInvite()" class="px-4 py-2 bg-blue-600 text-white rounded-xl text-xs font-bold shadow-md hover:bg-blue-700 transition">
+            + Add Speaker
+          </button>
+        </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Social Media Handle (To tag you on flyers) *</label>
-              <input type="text" id="form-speaker-social" placeholder="@maryjane_edeh" value="@maryjane_edeh" class="w-full px-3.5 py-2 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:outline-none">
-            </div>
-            <div>
-              <label class="block text-xs font-bold text-slate-700 uppercase mb-1">High-Resolution Headshot Photo *</label>
-              <input type="file" id="form-speaker-photo" accept="image/*" class="w-full text-xs text-slate-500 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
-            </div>
-          </div>
-
-          <div class="p-4 rounded-xl bg-amber-50 border border-amber-200 flex items-start space-x-3 text-xs text-amber-800">
-            <i data-lucide="info" class="w-4 h-4 text-amber-600 mt-0.5 flex-shrink-0"></i>
-            <div>
-              <strong>Why we ask for this early:</strong> Submitting your bio and photo immediately schedules the media team to craft your custom personalized flyer and delivers it straight to your email so you can share it with your network!
-            </div>
-          </div>
-
-          <div class="flex items-center justify-between pt-2">
-            <div class="flex items-center">
-              <input type="checkbox" id="confirm-agree" checked required class="w-4 h-4 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500">
-              <label for="confirm-agree" class="ml-2 text-xs text-slate-700 font-medium">I confirm my availability to speak on this date and time.</label>
-            </div>
-            <button type="submit" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl text-sm shadow-md transition flex items-center">
-              <i data-lucide="check-circle" class="w-4 h-4 mr-2"></i> Confirm & Submit Details
-            </button>
-          </div>
-        </form>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="speaker-card-container">
+          <!-- Rendered via JS -->
+        </div>
       </div>
-
     </div>
 
     <!-- ========================================== -->
-    <!-- 3. MEDIA TEAM & AI PROOFREADER VIEW        -->
+    <!-- 3. AI FLYER INSPECTION DESK                -->
     <!-- ========================================== -->
     <div id="view-designer-view" class="view-panel hidden space-y-6">
-      
-      <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
-        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-100 pb-4 mb-6">
+      <div class="glass-card rounded-3xl p-6 sm:p-8">
+        <div class="border-b border-blue-50 pb-5 mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
             <div class="flex items-center space-x-2">
-              <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">Media Team Station</span>
-              <span class="text-xs text-slate-400">• UpNestor AI Vision Gate</span>
+              <span class="text-xs font-bold px-3 py-1 rounded-full bg-blue-50 text-blue-700 border border-blue-200">
+                Media Team & AI Gate
+              </span>
+              <span class="text-xs text-slate-400">• UpNestor Vision Agent</span>
             </div>
-            <h2 class="text-xl font-bold text-slate-900 mt-1">Upload Promotional Flyer for AI Proofreading</h2>
-            <p class="text-xs text-slate-500">The AI vision agent checks for spelling typos, date mismatches, name discrepancies, and topic accuracy before any flyer goes live.</p>
+            <h2 class="text-2xl font-black text-slate-900 font-display mt-1">Autonomous Flyer Proofreading Station</h2>
+            <p class="text-xs text-slate-500 font-medium">The AI verifies that the speaker's name, topic, and date on the graphic match the database with 100% precision before publishing.</p>
           </div>
 
-          <div class="flex items-center space-x-3">
-            <select id="proof-speaker-select" onchange="loadSpeakerProofContext()" class="px-3 py-2 text-xs font-semibold border border-slate-300 rounded-xl bg-slate-50">
-              <option value="1">Speaker 1: Maryjane Edeh</option>
-              <option value="2">Speaker 2: Dr. Chidi Okafor</option>
-            </select>
-          </div>
+          <select id="proof-speaker-select" onchange="loadSpeakerProofContext()" class="px-4 py-2.5 text-xs font-bold border border-blue-200 rounded-xl bg-white text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-600">
+            <option value="1">Maryjane Edeh (Spatial AI)</option>
+            <option value="2">Dr. Chidi Okafor (AI Ethics)</option>
+            <option value="3">Joy Okoye (Program Leadership)</option>
+          </select>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
           
-          <!-- Left: Speaker Reference Sheet (What SHOULD be on the flyer) -->
+          <!-- Left: Database Ground Truth & Upload -->
           <div class="space-y-4">
-            <div class="bg-slate-50 rounded-xl p-4 border border-slate-200 space-y-3">
+            <div class="bg-blue-50/60 rounded-2xl p-5 border border-blue-100 space-y-3">
               <div class="flex items-center justify-between">
-                <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Approved Database Ground Truth</span>
-                <span class="text-[11px] text-emerald-600 font-bold bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">Verified</span>
+                <span class="text-[11px] font-black text-blue-700 uppercase tracking-widest">Database Ground Truth Reference</span>
+                <span class="text-[11px] text-blue-700 font-extrabold bg-white px-2.5 py-0.5 rounded-full border border-blue-200">Verified</span>
               </div>
 
               <div class="space-y-2 text-xs">
-                <div><span class="text-slate-400">Speaker Name:</span> <strong id="gt-name" class="text-slate-900 text-sm block">Maryjane Edeh</strong></div>
-                <div><span class="text-slate-400">Designated Topic:</span> <strong id="gt-topic" class="text-slate-900 block">Breaking into Spatial AI & 3D Real-Time Systems</strong></div>
-                <div><span class="text-slate-400">Event Date:</span> <strong id="gt-date" class="text-slate-900 block">October 30, 2026</strong></div>
-                <div><span class="text-slate-400">Speaking Time:</span> <strong id="gt-time" class="text-slate-900 block">11:00 AM – 11:45 AM (WAT)</strong></div>
-                <div><span class="text-slate-400">Social Tag:</span> <strong id="gt-social" class="text-indigo-600 block">@maryjane_edeh</strong></div>
-              </div>
-
-              <div class="pt-2 border-t border-slate-200 flex items-center justify-between">
-                <button onclick="downloadSpeakerAssetKit()" class="text-xs font-semibold text-indigo-600 hover:text-indigo-800 flex items-center">
-                  <i data-lucide="download" class="w-3.5 h-3.5 mr-1"></i> Download Speaker Headshot & Bio
-                </button>
+                <div><span class="text-slate-400">Speaker Name:</span> <strong id="gt-name" class="text-slate-900 text-sm block font-bold">Maryjane Edeh</strong></div>
+                <div><span class="text-slate-400">Designated Topic:</span> <strong id="gt-topic" class="text-slate-900 block font-bold">Breaking into Spatial AI & 3D Real-Time Systems</strong></div>
+                <div><span class="text-slate-400">Event Date:</span> <strong id="gt-date" class="text-slate-900 block font-bold">October 30, 2026</strong></div>
+                <div><span class="text-slate-400">Speaking Time:</span> <strong id="gt-time" class="text-slate-900 block font-bold">11:00 AM – 11:45 AM (WAT)</strong></div>
+                <div><span class="text-slate-400">Social Tag:</span> <strong id="gt-social" class="text-blue-600 block font-bold">@maryjane_edeh</strong></div>
               </div>
             </div>
 
-            <!-- Upload Section -->
-            <div class="border-2 border-dashed border-slate-300 hover:border-indigo-500 rounded-xl p-6 text-center transition cursor-pointer bg-slate-50/50" onclick="document.getElementById('flyer-input').click()">
+            <!-- Upload Box -->
+            <div class="border-2 border-dashed border-blue-200 hover:border-blue-600 rounded-2xl p-6 text-center transition cursor-pointer bg-white/60" onclick="document.getElementById('flyer-input').click()">
               <input type="file" id="flyer-input" accept="image/*" class="hidden" onchange="previewUploadedFlyer(event)">
-              <div class="mx-auto w-12 h-12 rounded-full bg-indigo-50 flex items-center justify-center text-indigo-600 mb-3">
-                <i data-lucide="image" class="w-6 h-6"></i>
+              <div class="mx-auto w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center text-blue-600 mb-3 shadow-inner">
+                <i data-lucide="image-up" class="w-6 h-6"></i>
               </div>
-              <div class="text-sm font-bold text-slate-800">Click to upload finished flyer design</div>
-              <p class="text-xs text-slate-500 mt-1">PNG, JPG, or WebP up to 10MB</p>
+              <div class="text-sm font-bold text-slate-800">Click to upload finished flyer graphic</div>
+              <p class="text-xs text-slate-400 mt-1">PNG, JPG, or WebP</p>
             </div>
 
-            <!-- Simulation Buttons to test AI immediately -->
-            <div class="bg-indigo-50/70 border border-indigo-100 rounded-xl p-3.5 space-y-2">
-              <span class="text-[11px] font-bold text-indigo-800 uppercase tracking-wide">Test AI Proofreader with 1-Click Samples:</span>
+            <!-- 1-Click Simulation Buttons -->
+            <div class="bg-blue-50 border border-blue-100 rounded-2xl p-4 space-y-2">
+              <span class="text-[11px] font-black text-blue-800 uppercase tracking-widest">Test AI Proofreader with 1-Click:</span>
               <div class="flex gap-2">
-                <button onclick="testSimulatedFlyer(true)" class="flex-1 px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold transition">
-                  ✓ Test 100% Perfect Flyer
+                <button onclick="testSimulatedFlyer(true)" class="flex-1 px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold transition shadow-sm">
+                  ✓ Test 100% Clean Flyer
                 </button>
-                <button onclick="testSimulatedFlyer(false)" class="flex-1 px-3 py-1.5 bg-rose-600 hover:bg-rose-700 text-white rounded-lg text-xs font-bold transition">
+                <button onclick="testSimulatedFlyer(false)" class="flex-1 px-3 py-2 bg-slate-800 hover:bg-slate-900 text-white rounded-xl text-xs font-bold transition shadow-sm">
                   ⚠️ Test Flyer with Typos
                 </button>
               </div>
             </div>
           </div>
 
-          <!-- Right: AI Vision Proofreading Results -->
-          <div class="bg-slate-900 rounded-xl p-5 text-white flex flex-col justify-between space-y-4 shadow-xl">
+          <!-- Right: AI Inspection Terminal (Pure Blue & White) -->
+          <div class="bg-blue-950 rounded-2xl p-6 text-white flex flex-col justify-between space-y-4 shadow-xl border border-blue-900">
             <div>
-              <div class="flex items-center justify-between border-b border-white/10 pb-3 mb-3">
+              <div class="flex items-center justify-between border-b border-blue-900 pb-3 mb-4">
                 <div class="flex items-center space-x-2">
-                  <i data-lucide="sparkles" class="w-4 h-4 text-purple-400"></i>
-                  <span class="font-bold text-sm tracking-wide">UpNestor AI Quality Agent</span>
+                  <i data-lucide="scan" class="w-4 h-4 text-cyan-300"></i>
+                  <span class="font-bold text-sm tracking-wide font-display">UpNestor AI Vision Audit</span>
                 </div>
-                <span id="ai-status-badge" class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-slate-800 text-slate-300 border border-slate-700">Awaiting Upload</span>
+                <span id="ai-status-badge" class="text-[11px] font-bold px-3 py-0.5 rounded-full bg-blue-900 text-blue-200 border border-blue-800">Awaiting Upload</span>
               </div>
 
-              <!-- Flyer Preview Window -->
-              <div id="flyer-preview-box" class="h-44 bg-slate-950 rounded-lg border border-slate-800 flex items-center justify-center text-xs text-slate-500 overflow-hidden relative">
+              <!-- Graphic Preview Canvas -->
+              <div id="flyer-preview-box" class="h-48 bg-blue-900/40 rounded-xl border border-blue-800 flex items-center justify-center text-xs text-blue-300 overflow-hidden relative">
                 <span>No flyer uploaded yet</span>
               </div>
 
-              <!-- AI Evaluation Checklist -->
+              <!-- Inspection Checklist -->
               <div class="mt-4 space-y-2 text-xs" id="ai-inspection-results">
-                <div class="text-slate-400 flex items-center"><i data-lucide="circle" class="w-3.5 h-3.5 mr-2"></i> Speaker Name Verification</div>
-                <div class="text-slate-400 flex items-center"><i data-lucide="circle" class="w-3.5 h-3.5 mr-2"></i> Session Topic & Title Match</div>
-                <div class="text-slate-400 flex items-center"><i data-lucide="circle" class="w-3.5 h-3.5 mr-2"></i> Date & Time Alignment</div>
-                <div class="text-slate-400 flex items-center"><i data-lucide="circle" class="w-3.5 h-3.5 mr-2"></i> Event Branding & Typo Detection</div>
+                <div class="text-blue-300 flex items-center"><i data-lucide="circle" class="w-3.5 h-3.5 mr-2"></i> Speaker Name Alignment</div>
+                <div class="text-blue-300 flex items-center"><i data-lucide="circle" class="w-3.5 h-3.5 mr-2"></i> Session Topic & Title Match</div>
+                <div class="text-blue-300 flex items-center"><i data-lucide="circle" class="w-3.5 h-3.5 mr-2"></i> Date & Time Alignment (VIP Event Centre)</div>
+                <div class="text-blue-300 flex items-center"><i data-lucide="circle" class="w-3.5 h-3.5 mr-2"></i> Typo & Character Resolution</div>
               </div>
             </div>
 
-            <!-- Action buttons after proofing -->
-            <div id="ai-action-footer" class="pt-3 border-t border-white/10 flex justify-between items-center hidden">
-              <span id="ai-verdict-text" class="text-xs font-semibold text-emerald-400">Ready to dispatch</span>
-              <button onclick="approveAndDispatchFlyer()" id="btn-dispatch" class="px-4 py-2 bg-emerald-500 hover:bg-emerald-400 text-slate-900 font-bold rounded-lg text-xs shadow-md transition flex items-center">
+            <div id="ai-action-footer" class="pt-4 border-t border-blue-900 flex justify-between items-center hidden">
+              <span id="ai-verdict-text" class="text-xs font-bold text-cyan-300">Ready to dispatch</span>
+              <button onclick="approveAndDispatchFlyer()" id="btn-dispatch" class="px-5 py-2.5 bg-cyan-400 hover:bg-cyan-300 text-slate-900 font-extrabold rounded-xl text-xs shadow-lg transition flex items-center font-display">
                 <i data-lucide="send" class="w-3.5 h-3.5 mr-1.5"></i> Approve & Auto-Dispatch Package
               </button>
             </div>
@@ -350,50 +309,49 @@
 
         </div>
       </div>
-
     </div>
 
     <!-- ========================================== -->
-    <!-- 4. DAY-OF-EVENT LIVE TRACKER & CHECK-IN    -->
+    <!-- 4. LIVE DAY-OF RADAR SCREEN                -->
     <!-- ========================================== -->
-    <div id="view-dayof-view" class="view-panel hidden space-y-6">
-      
-      <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
-        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-100 pb-4 mb-6">
+    <div id="view-radar-view" class="view-panel hidden space-y-6">
+      <div class="glass-card rounded-3xl p-6 sm:p-8">
+        
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-blue-50 pb-5 mb-6">
           <div>
-            <div class="inline-flex items-center space-x-2 px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-xs font-bold border border-emerald-200">
-              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
-              <span>LIVE DAY-OF OPERATIONS: Oct 30, 2026</span>
+            <div class="inline-flex items-center space-x-2 px-3 py-0.5 rounded-full bg-blue-50 text-blue-700 text-xs font-black border border-blue-200">
+              <span class="w-2 h-2 rounded-full bg-blue-600 animate-ping"></span>
+              <span>LIVE DAY-OF STAGE RADAR • OCT 30, 2026</span>
             </div>
-            <h2 class="text-xl font-bold text-slate-900 mt-1">Speaker Arrival & 1-Hour Schedule Radar</h2>
-            <p class="text-xs text-slate-500">Real-time attendance monitor. Automated "Are you here yet?" triggers fire exactly 60 minutes before stage time.</p>
+            <h2 class="text-2xl font-black text-slate-900 font-display mt-1">Stage Arrival & 60-Min Ping Radar</h2>
+            <p class="text-xs text-slate-500 font-medium">Real-time attendance monitor. Automated "Are you here yet?" triggers fire 1 hour before stage time.</p>
           </div>
 
           <div class="flex items-center space-x-3">
-            <button onclick="simulateSpeakerArrivalModal()" class="px-3.5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold shadow-sm transition flex items-center">
+            <button onclick="simulateSpeakerArrivalModal()" class="px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold shadow-md transition flex items-center">
               <i data-lucide="smartphone" class="w-4 h-4 mr-1.5"></i> Simulate Speaker "I'm Here!" Tap
             </button>
           </div>
         </div>
 
         <!-- Venue Navigation & Google Maps Banner -->
-        <div class="bg-slate-900 text-white rounded-xl p-5 mb-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+        <div class="bg-blue-950 text-white rounded-2xl p-6 mb-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border border-blue-900 shadow-xl">
           <div class="space-y-1">
-            <span class="text-[11px] font-bold text-yellow-400 uppercase tracking-wider">Summit Venue Navigation Hub</span>
-            <h3 class="text-base font-bold">VIP Event Centre • Main Hall, Enugu</h3>
-            <p class="text-xs text-slate-400">All speakers receive one-tap directions integrated directly into their confirmation SMS and reminder emails.</p>
+            <span class="text-[11px] font-extrabold text-cyan-300 uppercase tracking-widest">Summit Venue Navigation Hub</span>
+            <h3 class="text-lg font-black font-display">VIP Event Centre • Main Hall, Enugu</h3>
+            <p class="text-xs text-blue-200">All speakers receive one-tap turn-by-turn directions directly to VIP Event Centre in their SMS and reminders.</p>
           </div>
-          <a href="https://maps.google.com/?q=VIP+Event+Centre+Enugu+Nigeria" target="_blank" class="px-4 py-2.5 bg-yellow-400 hover:bg-yellow-300 text-slate-900 font-bold rounded-xl text-xs shadow-md transition flex items-center">
-            <i data-lucide="map" class="w-4 h-4 mr-2"></i> Launch Live Google Maps Navigation
+          <a href="https://maps.google.com/?q=VIP+Event+Centre+Enugu+Nigeria" target="_blank" class="px-5 py-3 bg-white hover:bg-blue-50 text-blue-900 font-extrabold rounded-xl text-xs shadow-md transition flex items-center font-display">
+            <i data-lucide="map" class="w-4 h-4 mr-2 text-blue-600"></i> Open Live Google Maps Navigation
           </a>
         </div>
 
         <!-- Real-Time Radar Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="dayof-speaker-cards">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5" id="dayof-speaker-cards">
           <!-- Rendered via JS -->
         </div>
-      </div>
 
+      </div>
     </div>
 
   </main>
@@ -401,29 +359,29 @@
   <!-- ========================================== -->
   <!-- MODAL: 1-HOUR CUTE SPEAKER PING SIMULATOR  -->
   <!-- ========================================== -->
-  <div id="cute-ping-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-100 transform transition-all scale-100 space-y-4">
-      <div class="flex items-center justify-between">
+  <div id="cute-ping-modal" class="fixed inset-0 bg-blue-950/70 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-blue-100 space-y-4">
+      <div class="flex items-center justify-between border-b border-blue-50 pb-3">
         <div class="flex items-center space-x-2">
-          <span class="w-8 h-8 rounded-full bg-yellow-100 text-yellow-700 flex items-center justify-center font-bold text-sm">✨</span>
-          <span class="text-xs font-bold text-slate-400 uppercase">Automated WhatsApp / SMS Ping</span>
+          <span class="w-8 h-8 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-sm">✨</span>
+          <span class="text-xs font-black text-blue-900 uppercase tracking-wider">Automated WhatsApp / SMS Ping</span>
         </div>
         <button onclick="closeModal('cute-ping-modal')" class="text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
 
-      <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 text-xs space-y-2">
-        <div class="font-bold text-slate-900">To: Maryjane Edeh (+234 906 340 4403)</div>
-        <div class="text-[11px] text-slate-400">Trigger: Exactly 1 hour before 11:00 AM stage time</div>
-        <div class="bg-white p-3 rounded-lg border border-slate-200 text-slate-800 text-xs leading-relaxed">
-          "Hi Maryjane! 🌟 We're so excited for your session on <strong>'Breaking into Spatial AI & 3D Real-Time Systems'</strong> coming up at 11:00 AM! <br><br>
-          Just doing a quick gentle check-in: <strong>Are you here at the venue yet?</strong> <br><br>
-          If you've arrived, tap the quick button below so Joy and the stage team know you're in the green room! If you need help with parking or finding the hall, our team is right at the entrance. See you soon! 🚀"
+      <div class="bg-blue-50/60 border border-blue-100 rounded-2xl p-4 text-xs space-y-2">
+        <div class="font-bold text-slate-900">To: Joy Okoye (+234 812 345 6789)</div>
+        <div class="text-[11px] text-blue-600 font-medium">Trigger: Exactly 1 hour before 10:00 AM stage time</div>
+        <div class="bg-white p-4 rounded-xl border border-blue-100 text-slate-800 text-xs leading-relaxed">
+          "Hi Joy! 🌟 We're so excited for your session on <strong>'Program Leadership: How to Organize Mega Tech Summits'</strong> coming up at 10:00 AM! <br><br>
+          Just doing a quick gentle check-in: <strong>Are you at VIP Event Centre yet?</strong> <br><br>
+          If you've arrived, tap the button below so the stage team knows you're in the green room! Our team is right at the entrance. See you soon! 🚀"
         </div>
       </div>
 
       <div class="flex flex-col gap-2">
-        <button onclick="speakerSelfCheckIn(1)" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs shadow-md transition flex items-center justify-center">
-          <i data-lucide="check" class="w-4 h-4 mr-2"></i> Speaker Taps: "Yes, I'm Here! 📍"
+        <button onclick="speakerSelfCheckIn(3)" class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-extrabold rounded-xl text-xs shadow-md transition flex items-center justify-center font-display">
+          <i data-lucide="map-pin" class="w-4 h-4 mr-2"></i> Speaker Taps: "Yes, I'm at VIP Event Centre! 📍"
         </button>
         <button onclick="closeModal('cute-ping-modal')" class="w-full py-2 bg-slate-100 hover:bg-slate-200 text-slate-600 font-semibold rounded-xl text-xs transition">
           Dismiss Demo
@@ -435,42 +393,42 @@
   <!-- ========================================== -->
   <!-- MODAL: SOCIAL MEDIA MANAGER DISPATCH READY -->
   <!-- ========================================== -->
-  <div id="social-dispatch-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-100 space-y-4">
-      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+  <div id="social-dispatch-modal" class="fixed inset-0 bg-blue-950/70 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-blue-100 space-y-4">
+      <div class="flex items-center justify-between border-b border-blue-50 pb-3">
         <div class="flex items-center space-x-2">
-          <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
-          <span class="font-bold text-sm text-slate-900">Promotional Package Auto-Dispatched! 🚀</span>
+          <span class="w-3 h-3 rounded-full bg-cyan-400"></span>
+          <span class="font-black text-sm text-slate-900 font-display">Promotional Package Auto-Dispatched! 🚀</span>
         </div>
         <button onclick="closeModal('social-dispatch-modal')" class="text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
 
       <div class="text-xs text-slate-600 space-y-3">
-        <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800">
-          <strong>AI Quality Check Passed:</strong> 100% match on Speaker Name, Session Topic, Date, and Branding.
+        <div class="p-3.5 rounded-xl bg-blue-50 border border-blue-200 text-blue-900 font-semibold">
+          ✓ AI Quality Check Passed: 100% verified match on Speaker Name, Session Topic, and VIP Event Centre.
         </div>
 
         <div>
-          <span class="font-bold text-slate-700 block mb-1">1. Speaker Email Sent:</span>
-          <p class="text-slate-500 bg-slate-50 p-2.5 rounded-lg border border-slate-200">
-            Delivered to: <strong>maryjanetony40@gmail.com</strong> with high-res PNG flyer attachment and customized copy for their LinkedIn & Instagram followers.
+          <span class="font-bold text-slate-700 block mb-1">1. Speaker Email Delivered:</span>
+          <p class="text-slate-500 bg-slate-50 p-3 rounded-xl border border-slate-200">
+            Sent to <strong>joy@upnestor.com</strong> with high-res flyer attachment and customized LinkedIn/Instagram copy.
           </p>
         </div>
 
         <div>
           <span class="font-bold text-slate-700 block mb-1">2. Ready-to-Post Copy for UpNestor Social Media Manager:</span>
-          <div class="bg-slate-900 text-slate-200 p-3 rounded-lg text-[11px] font-mono leading-relaxed" id="auto-caption-box">
-            🚀 SPEAKER ANNOUNCEMENT! We are thrilled to welcome @maryjane_edeh to the Teen Think Innovation (TTI) Summit 2026 stage!<br><br>
-            ✨ Session: "Breaking into Spatial AI & 3D Real-Time Systems"<br>
-            🗓 Date: October 30, 2026 | 11:00 AM (WAT)<br>
-            📍 Tech Innovation Complex, Enugu<br><br>
-            Discover high-impact careers in spatial computing, game engines, and multimodal AI. Don't miss this! #TTISummit2026 #TeenThinkInnovation #UpNestorStudio #YouthInTech
+          <div class="bg-blue-950 text-blue-100 p-4 rounded-xl text-[11px] font-mono leading-relaxed" id="auto-caption-box">
+            🚀 SPEAKER ANNOUNCEMENT! We are thrilled to welcome @joy_okoye to the Teen Think Innovation (TTI) Summit 2026 stage!<br><br>
+            ✨ Session: "Program Leadership: How to Organize Mega Tech Summits"<br>
+            🗓 Date: October 30, 2026 | 10:00 AM (WAT)<br>
+            📍 VIP Event Centre, Enugu<br><br>
+            Empowering youth through tech careers outside traditional fields. See you there! #TTISummit2026 #UpNestorStudio #YouthInTech
           </div>
         </div>
       </div>
 
       <div class="flex justify-end gap-2 pt-2">
-        <button onclick="copySocialCaption()" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl text-xs transition flex items-center">
+        <button onclick="copySocialCaption()" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-extrabold rounded-xl text-xs transition flex items-center font-display">
           <i data-lucide="copy" class="w-3.5 h-3.5 mr-1.5"></i> Copy Caption to Clipboard
         </button>
         <button onclick="closeModal('social-dispatch-modal')" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl text-xs transition">
@@ -482,7 +440,7 @@
 
   <!-- APPLICATION LOGIC SCRIPT -->
   <script>
-    // Master State
+    // Master State (Pure Blue & White)
     const speakers = [
       {
         id: 1,
@@ -498,7 +456,7 @@
         aiVerified: true,
         dispatched: true,
         checkedIn: false,
-        etaMinutes: 45
+        avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80"
       },
       {
         id: 2,
@@ -514,112 +472,110 @@
         aiVerified: false,
         dispatched: false,
         checkedIn: false,
-        etaMinutes: 165
+        avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80"
       },
       {
-        id: 4,
-        name: "Engr. Nnamdi Eze",
-        email: "nnamdi.eze@example.com",
-        phone: "+234 701 999 8888",
-        topic: "Modern Robotics, Drones & Hardware Prototyping",
-        date: "October 31, 2026",
-        time: "2:00 PM – 2:45 PM (WAT)",
-        social: "@nnamdi_tech",
+        id: 3,
+        name: "Joy Okoye",
+        email: "joy@upnestor.com",
+        phone: "+234 812 345 6789",
+        topic: "Program Leadership: How to Organize Mega Tech Summits",
+        date: "October 30, 2026",
+        time: "10:00 AM – 10:45 AM (WAT)",
+        social: "@joy_okoye",
         bioReceived: false,
         flyerUploaded: false,
         aiVerified: false,
         dispatched: false,
         checkedIn: false,
-        etaMinutes: 300
+        avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80"
       }
     ];
 
-    // Initialize Lucide Icons
+    // Clock in WAT (West Africa Time)
+    function updateClock() {
+      const now = new Date();
+      const options = { timeZone: 'Africa/Lagos', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+      const timeStr = now.toLocaleTimeString('en-US', options);
+      const clockEl = document.getElementById('wat-clock');
+      if (clockEl) clockEl.innerText = `${timeStr} WAT`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
     function refreshIcons() {
-      if (window.lucide) {
-        lucide.createIcons();
-      }
+      if (window.lucide) lucide.createIcons();
     }
 
     // Tab Navigation
     function switchTab(tabId) {
       document.querySelectorAll('.view-panel').forEach(el => el.classList.add('hidden'));
       document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.classList.remove('bg-white', 'text-indigo-700', 'font-semibold', 'shadow-sm');
-        btn.classList.add('text-slate-600');
+        btn.classList.remove('bg-blue-600', 'text-white', 'shadow-md');
+        btn.classList.add('text-blue-900');
       });
 
       document.getElementById('view-' + tabId).classList.remove('hidden');
       const activeBtn = document.getElementById('tab-' + tabId.replace('-view', ''));
       if (activeBtn) {
-        activeBtn.classList.add('bg-white', 'text-indigo-700', 'font-semibold', 'shadow-sm');
-        activeBtn.classList.remove('text-slate-600');
+        activeBtn.classList.add('bg-blue-600', 'text-white', 'shadow-md');
+        activeBtn.classList.remove('text-blue-900');
       }
       refreshIcons();
     }
 
-    // Direct Speaker Portal Loader (URL Parameter Support)
-    function checkUrlForSpeaker() {
-      const urlParams = new URLSearchParams(window.location.search);
-      const speakerParam = urlParams.get('speaker') || urlParams.get('tab');
-      
-      if (speakerParam === 'onboarding' || urlParams.has('speaker')) {
-        switchTab('speaker-view');
-        // Hide top nav if they came strictly via speaker link
-        if (urlParams.get('view') === 'guest') {
-          const nav = document.querySelector('header nav');
-          if (nav) nav.classList.add('hidden');
-        }
-      }
-    }
-
-    // Render Master Table in PM View
+    // Render Master Table
     function renderSpeakerTable() {
       const tbody = document.getElementById('speaker-table-body');
       tbody.innerHTML = '';
 
       speakers.forEach(sp => {
         const tr = document.createElement('tr');
-        tr.className = 'hover:bg-slate-50/80 transition';
+        tr.className = 'hover:bg-blue-50/50 transition';
         tr.innerHTML = `
-          <td class="py-3.5 px-4">
-            <div class="font-bold text-slate-900">${sp.name}</div>
-            <div class="text-xs text-indigo-600 font-medium">${sp.topic}</div>
-            <div class="text-[11px] text-slate-400">${sp.social} • ${sp.phone}</div>
+          <td class="py-4 px-5">
+            <div class="flex items-center space-x-3">
+              <img src="${sp.avatar}" class="w-10 h-10 rounded-xl object-cover border border-blue-200">
+              <div>
+                <div class="font-extrabold text-slate-900">${sp.name}</div>
+                <div class="text-xs text-blue-600 font-semibold line-clamp-1">${sp.topic}</div>
+                <div class="text-[11px] text-slate-400">${sp.social}</div>
+              </div>
+            </div>
           </td>
-          <td class="py-3.5 px-4">
-            <div class="font-medium text-slate-800">${sp.date}</div>
-            <div class="text-xs text-slate-500">${sp.time}</div>
+          <td class="py-4 px-4">
+            <div class="font-bold text-slate-800">${sp.date}</div>
+            <div class="text-xs text-slate-500 font-medium">${sp.time}</div>
           </td>
-          <td class="py-3.5 px-4">
+          <td class="py-4 px-4">
             ${sp.bioReceived 
-              ? '<span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200"><i data-lucide="check" class="w-3 h-3 mr-1"></i> Bio & Photo OK</span>'
-              : '<span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200"><i data-lucide="clock" class="w-3 h-3 mr-1"></i> Awaiting Bio</span>'
+              ? '<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-blue-50 text-blue-700 border border-blue-200"><i data-lucide="check" class="w-3 h-3 mr-1 text-blue-600"></i> Bio & Photo OK</span>'
+              : '<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-white text-slate-500 border border-slate-200"><i data-lucide="clock" class="w-3 h-3 mr-1 text-blue-500"></i> Awaiting Bio</span>'
             }
           </td>
-          <td class="py-3.5 px-4">
+          <td class="py-4 px-4">
             ${sp.flyerUploaded 
-              ? '<span class="text-xs font-bold text-slate-700 flex items-center"><i data-lucide="file-check" class="w-3.5 h-3.5 text-indigo-600 mr-1"></i> Uploaded</span>'
+              ? '<span class="text-xs font-bold text-blue-700 flex items-center"><i data-lucide="file-check" class="w-3.5 h-3.5 mr-1 text-blue-600"></i> Uploaded</span>'
               : '<span class="text-xs text-slate-400 italic">In Design</span>'
             }
           </td>
-          <td class="py-3.5 px-4">
+          <td class="py-4 px-4">
             ${sp.aiVerified
-              ? '<span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-purple-50 text-purple-700 border border-purple-200">✓ AI Approved</span>'
-              : sp.flyerUploaded ? '<span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-blue-50 text-blue-700">Ready to Proof</span>' : '<span class="text-xs text-slate-400">—</span>'
+              ? '<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-cyan-50 text-cyan-800 border border-cyan-200">✓ AI Approved</span>'
+              : sp.flyerUploaded ? '<span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-blue-100 text-blue-800">Ready to Proof</span>' : '<span class="text-xs text-slate-400">—</span>'
             }
           </td>
-          <td class="py-3.5 px-4">
+          <td class="py-4 px-4">
             ${sp.checkedIn 
-              ? '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-300">📍 At Venue</span>'
-              : '<span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs text-slate-500 bg-slate-100">En Route</span>'
+              ? '<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-black bg-blue-600 text-white shadow-sm">📍 At VIP Centre</span>'
+              : '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold text-slate-500 bg-slate-100">En Route</span>'
             }
           </td>
-          <td class="py-3.5 px-4 text-right space-x-1">
-            <button onclick="sendDirectReminder(${sp.id})" title="Send WhatsApp/Email Reminder" class="p-1.5 rounded-lg hover:bg-slate-200 text-slate-600">
+          <td class="py-4 px-5 text-right space-x-1.5">
+            <button onclick="testCutePingDemo()" title="Send 1-Hr Arrival Ping" class="p-2 rounded-xl hover:bg-blue-100 text-blue-600 transition">
               <i data-lucide="bell" class="w-4 h-4"></i>
             </button>
-            <button onclick="switchTab('designer-view')" title="Open in AI Proofreader" class="p-1.5 rounded-lg hover:bg-indigo-50 text-indigo-600">
+            <button onclick="switchTab('designer-view')" title="Open in AI Proofreader" class="p-2 rounded-xl hover:bg-blue-100 text-blue-600 transition">
               <i data-lucide="eye" class="w-4 h-4"></i>
             </button>
           </td>
@@ -627,36 +583,80 @@
         tbody.appendChild(tr);
       });
 
-      renderDayOfCards();
+      renderSpeakerCards();
+      renderRadarCards();
       refreshIcons();
     }
 
-    // Render Day-Of Radar Cards
-    function renderDayOfCards() {
+    // Render Speaker Grid Cards
+    function renderSpeakerCards() {
+      const container = document.getElementById('speaker-card-container');
+      if (!container) return;
+      container.innerHTML = '';
+
+      speakers.forEach(sp => {
+        const card = document.createElement('div');
+        card.className = "bg-white rounded-2xl p-5 border border-blue-100 shadow-sm space-y-4 hover:shadow-md transition flex flex-col justify-between";
+        card.innerHTML = `
+          <div class="space-y-3">
+            <div class="flex items-start justify-between">
+              <img src="${sp.avatar}" class="w-14 h-14 rounded-2xl object-cover border-2 border-blue-200 shadow-sm">
+              <span class="text-[11px] font-black px-2.5 py-1 rounded-full ${sp.checkedIn ? 'bg-blue-600 text-white' : 'bg-blue-50 text-blue-700'}">
+                ${sp.checkedIn ? 'Checked In' : 'Confirmed'}
+              </span>
+            </div>
+            <div>
+              <h3 class="text-base font-extrabold text-slate-900 font-display">${sp.name}</h3>
+              <p class="text-xs text-blue-600 font-semibold line-clamp-2 mt-0.5">${sp.topic}</p>
+            </div>
+            <div class="text-xs text-slate-500 space-y-1 pt-2 border-t border-slate-100">
+              <div class="flex items-center"><i data-lucide="calendar" class="w-3.5 h-3.5 mr-1.5 text-blue-600"></i> ${sp.date}</div>
+              <div class="flex items-center"><i data-lucide="clock" class="w-3.5 h-3.5 mr-1.5 text-blue-600"></i> ${sp.time}</div>
+              <div class="flex items-center"><i data-lucide="map-pin" class="w-3.5 h-3.5 mr-1.5 text-blue-600"></i> VIP Event Centre, Enugu</div>
+            </div>
+          </div>
+
+          <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+            <span class="text-xs font-bold text-slate-400">${sp.social}</span>
+            <a href="speaker.html?speaker=${encodeURIComponent(sp.name)}&topic=${encodeURIComponent(sp.topic)}" target="_blank" class="text-xs font-extrabold text-blue-600 hover:text-blue-800 flex items-center">
+              Portal Link <i data-lucide="arrow-right" class="w-3.5 h-3.5 ml-1"></i>
+            </a>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+      refreshIcons();
+    }
+
+    // Render Radar Cards
+    function renderRadarCards() {
       const container = document.getElementById('dayof-speaker-cards');
       if (!container) return;
       container.innerHTML = '';
 
       speakers.forEach(sp => {
         const card = document.createElement('div');
-        card.className = `p-4 rounded-xl border ${sp.checkedIn ? 'bg-emerald-50/50 border-emerald-200' : 'bg-white border-slate-200'} shadow-sm space-y-3`;
+        card.className = `p-5 rounded-2xl border ${sp.checkedIn ? 'bg-blue-50/80 border-blue-300' : 'bg-white border-blue-100'} shadow-sm space-y-3.5`;
         card.innerHTML = `
           <div class="flex items-start justify-between">
-            <div>
-              <div class="font-bold text-sm text-slate-900">${sp.name}</div>
-              <div class="text-xs text-slate-500">${sp.time}</div>
+            <div class="flex items-center space-x-3">
+              <img src="${sp.avatar}" class="w-10 h-10 rounded-xl object-cover border border-blue-200">
+              <div>
+                <div class="font-extrabold text-sm text-slate-900">${sp.name}</div>
+                <div class="text-xs text-blue-600 font-semibold">${sp.time}</div>
+              </div>
             </div>
             ${sp.checkedIn 
-              ? '<span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-bold">Checked In</span>'
-              : '<span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[11px] font-bold">Pending Arrival</span>'
+              ? '<span class="px-2.5 py-1 rounded-full bg-blue-600 text-white text-[11px] font-black">At VIP Centre</span>'
+              : '<span class="px-2.5 py-1 rounded-full bg-blue-100 text-blue-800 text-[11px] font-bold">En Route</span>'
             }
           </div>
-          <div class="text-xs text-indigo-700 font-medium line-clamp-1">${sp.topic}</div>
-          <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-xs">
-            <span class="text-slate-400">Phone: ${sp.phone}</span>
+          <div class="text-xs text-slate-700 font-medium line-clamp-1">${sp.topic}</div>
+          <div class="pt-3 border-t border-blue-50 flex items-center justify-between text-xs">
+            <span class="text-slate-400 font-medium">${sp.phone}</span>
             ${sp.checkedIn 
-              ? '<span class="text-emerald-700 font-semibold flex items-center"><i data-lucide="check-circle-2" class="w-3.5 h-3.5 mr-1"></i> Ready for Stage</span>'
-              : `<button onclick="triggerCutePingForSpeaker(${sp.id})" class="px-2 py-1 bg-yellow-400 hover:bg-yellow-300 text-slate-900 font-bold rounded text-[11px] transition">Ping Speaker</button>`
+              ? '<span class="text-blue-700 font-bold flex items-center"><i data-lucide="check-circle" class="w-3.5 h-3.5 mr-1"></i> Ready for Stage</span>'
+              : `<button onclick="testCutePingDemo()" class="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-[11px] transition">Ping Arrival</button>`
             }
           </div>
         `;
@@ -674,21 +674,21 @@
       const selectedSpeaker = speakers[0]; // Maryjane Edeh
 
       statusBadge.innerText = 'AI Scanning...';
-      statusBadge.className = 'text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-indigo-900 text-indigo-200 border border-indigo-700 animate-pulse';
+      statusBadge.className = 'text-[11px] font-bold px-3 py-0.5 rounded-full bg-cyan-900 text-cyan-200 border border-cyan-700 animate-pulse';
 
       previewBox.innerHTML = `
-        <div class="w-full h-full bg-gradient-to-tr from-indigo-950 via-slate-900 to-purple-900 p-4 flex flex-col justify-between text-white border border-indigo-500/30">
+        <div class="w-full h-full bg-gradient-to-tr from-blue-950 via-blue-900 to-indigo-900 p-4 flex flex-col justify-between text-white border border-blue-400/30">
           <div class="flex justify-between items-start">
-            <span class="text-[10px] font-bold text-indigo-300">TTI SUMMIT 2026 • SPEAKER FLYER</span>
-            <span class="text-[10px] bg-yellow-400 text-slate-900 px-1.5 py-0.5 rounded font-black">ENUGU</span>
+            <span class="text-[10px] font-black text-cyan-300 font-display">TEEN THINK INNOVATION 2026</span>
+            <span class="text-[10px] bg-white text-blue-900 px-2 py-0.5 rounded-full font-black">ENUGU</span>
           </div>
           <div class="space-y-1 my-2">
-            <div class="text-sm font-extrabold ${isPerfect ? 'text-white' : 'text-rose-300'}">${isPerfect ? selectedSpeaker.name : 'Maryjean Edeh (TYPO)'}</div>
-            <div class="text-[11px] text-indigo-200">${selectedSpeaker.topic}</div>
-            <div class="text-[10px] text-slate-300">${isPerfect ? selectedSpeaker.date : 'Oct 29, 2026 (WRONG DATE)'} • ${selectedSpeaker.time}</div>
+            <div class="text-sm font-black ${isPerfect ? 'text-white' : 'text-rose-300 font-mono'} font-display">${isPerfect ? selectedSpeaker.name : 'Maryjean Edeh (TYPO)'}</div>
+            <div class="text-[11px] text-blue-200 font-medium">${selectedSpeaker.topic}</div>
+            <div class="text-[10px] text-cyan-200">${isPerfect ? selectedSpeaker.date : 'Oct 29, 2026 (WRONG DATE)'} • ${selectedSpeaker.time}</div>
           </div>
-          <div class="text-[9px] text-slate-400 flex justify-between">
-            <span>Tech Innovation Complex</span>
+          <div class="text-[9px] text-blue-300 flex justify-between">
+            <span>VIP Event Centre</span>
             <span>${selectedSpeaker.social}</span>
           </div>
         </div>
@@ -696,22 +696,22 @@
 
       setTimeout(() => {
         if (isPerfect) {
-          statusBadge.innerText = '100% Verified Clean';
-          statusBadge.className = 'text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-900 text-emerald-200 border border-emerald-700';
+          statusBadge.innerText = '100% Clean Verified';
+          statusBadge.className = 'text-[11px] font-bold px-3 py-0.5 rounded-full bg-cyan-400 text-slate-900 font-display';
           resultsBox.innerHTML = `
-            <div class="text-emerald-400 flex items-center"><i data-lucide="check-circle" class="w-3.5 h-3.5 mr-2"></i> Speaker Name: "Maryjane Edeh" matches database perfectly.</div>
-            <div class="text-emerald-400 flex items-center"><i data-lucide="check-circle" class="w-3.5 h-3.5 mr-2"></i> Topic: "Breaking into Spatial AI & 3D Real-Time Systems" confirmed.</div>
-            <div class="text-emerald-400 flex items-center"><i data-lucide="check-circle" class="w-3.5 h-3.5 mr-2"></i> Date & Time: "October 30, 2026 @ 11:00 AM" verified.</div>
-            <div class="text-emerald-400 flex items-center"><i data-lucide="check-circle" class="w-3.5 h-3.5 mr-2"></i> Social Tag: "@maryjane_edeh" present & legible.</div>
+            <div class="text-cyan-300 flex items-center font-medium"><i data-lucide="check-circle" class="w-3.5 h-3.5 mr-2 text-cyan-400"></i> Speaker Name: "Maryjane Edeh" verified.</div>
+            <div class="text-cyan-300 flex items-center font-medium"><i data-lucide="check-circle" class="w-3.5 h-3.5 mr-2 text-cyan-400"></i> Topic: "Breaking into Spatial AI & 3D Real-Time Systems" confirmed.</div>
+            <div class="text-cyan-300 flex items-center font-medium"><i data-lucide="check-circle" class="w-3.5 h-3.5 mr-2 text-cyan-400"></i> Date & Venue: "October 30, 2026 @ VIP Event Centre" verified.</div>
+            <div class="text-cyan-300 flex items-center font-medium"><i data-lucide="check-circle" class="w-3.5 h-3.5 mr-2 text-cyan-400"></i> Social Tag: "@maryjane_edeh" verified.</div>
           `;
           actionFooter.classList.remove('hidden');
         } else {
           statusBadge.innerText = 'Errors Detected - Revision Sent';
-          statusBadge.className = 'text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-rose-900 text-rose-200 border border-rose-700';
+          statusBadge.className = 'text-[11px] font-bold px-3 py-0.5 rounded-full bg-white text-slate-900';
           resultsBox.innerHTML = `
-            <div class="text-rose-400 flex items-start"><i data-lucide="alert-triangle" class="w-3.5 h-3.5 mr-2 mt-0.5 flex-shrink-0"></i> <strong>TYPO DETECTED:</strong> Speaker name printed as "Maryjean Edeh" instead of "Maryjane Edeh".</div>
-            <div class="text-rose-400 flex items-start"><i data-lucide="alert-triangle" class="w-3.5 h-3.5 mr-2 mt-0.5 flex-shrink-0"></i> <strong>DATE MISMATCH:</strong> Flyer lists "Oct 29", but official program date is "October 30, 2026".</div>
-            <div class="text-amber-300 text-[11px] mt-2 p-2 rounded bg-rose-950/60 border border-rose-800">
+            <div class="text-rose-300 flex items-start font-medium"><i data-lucide="alert-triangle" class="w-3.5 h-3.5 mr-2 mt-0.5 flex-shrink-0 text-rose-400"></i> <strong>TYPO DETECTED:</strong> Speaker name printed as "Maryjean Edeh" instead of "Maryjane Edeh".</div>
+            <div class="text-rose-300 flex items-start font-medium"><i data-lucide="alert-triangle" class="w-3.5 h-3.5 mr-2 mt-0.5 flex-shrink-0 text-rose-400"></i> <strong>DATE MISMATCH:</strong> Flyer lists "Oct 29", but official date is "October 30, 2026".</div>
+            <div class="text-blue-200 text-[11px] mt-2 p-2.5 rounded-xl bg-blue-900/80 border border-blue-700">
               Automated message sent to Media Designer: <em>"Hey, please fix the speaker name spelling and event date on Maryjane's flyer and re-upload!"</em>
             </div>
           `;
@@ -721,7 +721,6 @@
       }, 700);
     }
 
-    // Approve & Auto-Dispatch Package
     function approveAndDispatchFlyer() {
       document.getElementById('social-dispatch-modal').classList.remove('hidden');
       speakers[0].aiVerified = true;
@@ -729,7 +728,6 @@
       renderSpeakerTable();
     }
 
-    // Modal Helpers
     function closeModal(modalId) {
       document.getElementById(modalId).classList.add('hidden');
     }
@@ -739,40 +737,24 @@
       refreshIcons();
     }
 
-    function triggerCutePingForSpeaker(id) {
-      testCutePingDemo();
-    }
-
     function speakerSelfCheckIn(id) {
       const sp = speakers.find(s => s.id === id);
       if (sp) {
         sp.checkedIn = true;
         renderSpeakerTable();
         closeModal('cute-ping-modal');
-        alert(`Success! ${sp.name} has officially checked in. The PM dashboard has been updated to 'At Venue'!`);
+        alert(`Success! ${sp.name} has officially checked in at VIP Event Centre. The PM dashboard is updated to 'At VIP Centre'!`);
       }
     }
 
     function copySocialCaption() {
       const text = document.getElementById('auto-caption-box').innerText;
       navigator.clipboard.writeText(text);
-      alert('Promotional caption & speaker tags copied to clipboard!');
-    }
-
-    function handleSpeakerSubmission(e) {
-      e.preventDefault();
-      alert('Thank you! Your speaker bio, photo, and details have been confirmed. UpNestor Media team has been notified to produce your official flyer!');
-      speakers[0].bioReceived = true;
-      switchTab('pm-view');
-      renderSpeakerTable();
-    }
-
-    function downloadSpeakerAssetKit() {
-      alert('Downloading Speaker Asset Kit: Headshot (High-Res PNG), Bio text, and Session topic requirements.');
+      alert('Caption copied to clipboard!');
     }
 
     function triggerQuickInvite() {
-      const name = prompt('Enter Speaker Full Name to Invite (e.g. Joy Okoye):', 'Joy Okoye');
+      const name = prompt('Enter Speaker Full Name (e.g. Joy Okoye):', 'Joy Okoye');
       if (name) {
         const topic = prompt('Enter Session Topic:', 'Program Leadership: How to Organize Mega Tech Summits');
         const newSpeaker = {
@@ -789,64 +771,16 @@
           aiVerified: false,
           dispatched: false,
           checkedIn: false,
-          etaMinutes: 60
+          avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80"
         };
         speakers.push(newSpeaker);
         renderSpeakerTable();
-
-        // Generate the real shareable link
-        const baseUrl = window.location.origin + window.location.pathname;
-        const speakerLink = `${baseUrl}?speaker=${encodeURIComponent(name)}&topic=${encodeURIComponent(newSpeaker.topic)}`;
-
-        // Open custom copyable modal instead of plain alert
-        showInviteLinkModal(name, speakerLink);
+        alert(`Invitation generated for ${name}!`);
       }
     }
 
-    function showInviteLinkModal(name, link) {
-      const modal = document.createElement('div');
-      modal.id = 'temp-invite-modal';
-      modal.className = 'fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4';
-      modal.innerHTML = `
-        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-100 space-y-4">
-          <div class="flex items-center justify-between border-b pb-3">
-            <span class="font-bold text-sm text-slate-900">Personal Speaker Link Ready! 🔗</span>
-            <button onclick="document.getElementById('temp-invite-modal').remove()" class="text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-5 h-5"></i></button>
-          </div>
-          <p class="text-xs text-slate-600">Send this private onboarding link directly to <strong>${name}</strong> on WhatsApp or Email:</p>
-          <div class="flex gap-2">
-            <input type="text" id="copy-link-input" readonly value="${link}" class="w-full text-xs bg-slate-50 border p-2.5 rounded-lg text-slate-700 font-mono select-all">
-            <button onclick="copyGeneratedSpeakerLink()" class="px-3 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-lg text-xs flex-shrink-0">
-              Copy
-            </button>
-          </div>
-          <div class="pt-2 flex justify-end">
-            <button onclick="document.getElementById('temp-invite-modal').remove()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl text-xs">
-              Done
-            </button>
-          </div>
-        </div>
-      `;
-      document.body.appendChild(modal);
-      refreshIcons();
-    }
-
-    function copyGeneratedSpeakerLink() {
-      const input = document.getElementById('copy-link-input');
-      input.select();
-      navigator.clipboard.writeText(input.value);
-      alert('Speaker Invitation Link copied to clipboard!');
-    }
-
-    function sendDirectReminder(id) {
-      const sp = speakers.find(s => s.id === id);
-      alert(`Automated follow-up message sent to ${sp.name} via WhatsApp & Email!`);
-    }
-
-    // Initial render
     window.onload = function() {
       renderSpeakerTable();
-      checkUrlForSpeaker();
     };
   </script>
 </body>
