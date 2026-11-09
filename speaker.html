@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Speaker Onboarding & Confirmation — Teen Think Innovation (TTI) Summit 2026</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .bg-grid { background-image: radial-gradient(rgba(99, 102, 241, 0.08) 1px, transparent 1px); background-size: 24px 24px; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col bg-grid py-8 px-4 sm:px-6">
+
+  <!-- BRAND HEADER -->
+  <header class="max-w-2xl mx-auto w-full mb-6 flex items-center justify-between">
+    <div class="flex items-center space-x-3">
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-700 to-purple-600 flex items-center justify-center text-white font-black shadow-md shadow-indigo-100">
+        UN
+      </div>
+      <div>
+        <div class="flex items-center space-x-2">
+          <span class="font-bold text-base text-slate-900 tracking-tight">UpNestor Studio</span>
+          <span class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200">EventOps AI</span>
+        </div>
+        <p class="text-[11px] text-slate-500">Program & Speaker Operations Hub</p>
+      </div>
+    </div>
+    <span class="text-xs font-bold text-indigo-600 bg-white px-3 py-1.5 rounded-lg border border-slate-200 shadow-sm">TTI Summit 2026</span>
+  </header>
+
+  <!-- MAIN CARD CONTAINER -->
+  <main class="max-w-2xl mx-auto w-full bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm space-y-6">
+
+    <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+      <div class="flex items-center space-x-2">
+        <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-purple-50 text-purple-700 border border-purple-200">Personal Speaker Invitation</span>
+        <span class="text-xs text-slate-400">• UpNestor Secure Portal</span>
+      </div>
+      <span class="text-xs text-emerald-600 font-bold flex items-center"><i data-lucide="shield-check" class="w-3.5 h-3.5 mr-1"></i> Verified Link</span>
+    </div>
+
+    <div class="space-y-2">
+      <h1 class="text-2xl sm:text-3xl font-black text-slate-900">Welcome to Teen Think Innovation (TTI) Summit 2026!</h1>
+      <p class="text-xs sm:text-sm text-slate-600">
+        We are thrilled and honored to have you speak to our vibrant cohort of teens, youths, and students on emerging careers in technology, creative industries, and future-forward pathways.
+      </p>
+    </div>
+
+    <!-- Assigned Session Details Card -->
+    <div class="bg-gradient-to-r from-slate-900 to-indigo-950 text-white rounded-xl p-5 shadow-inner space-y-3">
+      <div class="text-[11px] font-bold text-indigo-300 uppercase tracking-wider">Your Assigned Session Details</div>
+      <div class="text-lg font-bold text-white" id="display-topic">Topic: Program Leadership & Next-Gen Innovation</div>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-slate-300 pt-2 border-t border-white/10">
+        <div class="flex items-center"><i data-lucide="calendar" class="w-4 h-4 mr-2 text-indigo-400"></i> Date: <strong>October 30, 2026</strong></div>
+        <div class="flex items-center"><i data-lucide="clock" class="w-4 h-4 mr-2 text-indigo-400"></i> Time: <strong>10:00 AM – 10:45 AM (WAT)</strong></div>
+        <div class="flex items-center"><i data-lucide="map-pin" class="w-4 h-4 mr-2 text-indigo-400"></i> VIP Event Centre, Enugu</div>
+        <div>
+          <a href="https://maps.google.com/?q=VIP+Event+Centre+Enugu+Nigeria" target="_blank" class="inline-flex items-center text-xs font-semibold text-yellow-400 hover:text-yellow-300 underline">
+            <i data-lucide="navigation" class="w-3.5 h-3.5 mr-1"></i> Open Google Maps Directions
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Onboarding Form -->
+    <form id="speaker-form" onsubmit="handleSpeakerSubmission(event)" class="space-y-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Full Name (Exactly as it appears on flyer) *</label>
+          <input type="text" id="sp-name" required value="Joy Okoye" class="w-full px-3.5 py-2 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Professional Title / Role *</label>
+          <input type="text" id="sp-title" required value="Founder & Lead Program Manager, UpNestor Studio" class="w-full px-3.5 py-2 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Email Address (For Flyer Delivery) *</label>
+          <input type="email" id="sp-email" required value="joy@upnestor.com" class="w-full px-3.5 py-2 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Phone / WhatsApp (For Day-Of Updates) *</label>
+          <input type="tel" id="sp-phone" required value="+234 812 345 6789" class="w-full px-3.5 py-2 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Short Speaker Bio (For event booklet & intro) *</label>
+        <textarea id="sp-bio" rows="3" required class="w-full px-3.5 py-2 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:outline-none">Joy Okoye is the founder of UpNestor Studio and lead organizer of the Teen Think Innovation (TTI) Summit. She is a dedicated project and program manager committed to empowering youth through technological career discovery.</textarea>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Social Media Handle (To tag you on flyers) *</label>
+          <input type="text" id="sp-social" value="@joy_okoye" class="w-full px-3.5 py-2 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase mb-1">High-Resolution Headshot Photo *</label>
+          <input type="file" id="sp-photo" accept="image/*" class="w-full text-xs text-slate-500 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
+        </div>
+      </div>
+
+      <div class="p-4 rounded-xl bg-amber-50 border border-amber-200 flex items-start space-x-3 text-xs text-amber-800">
+        <i data-lucide="info" class="w-4 h-4 text-amber-600 mt-0.5 flex-shrink-0"></i>
+        <div>
+          <strong>Why we ask for this early:</strong> Submitting your details notifies the UpNestor media team to create your official promotional flyer, proofread it via AI, and email it directly back to you so you can announce your session to your audience!
+        </div>
+      </div>
+
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-2">
+        <div class="flex items-center">
+          <input type="checkbox" id="confirm-agree" checked required class="w-4 h-4 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500">
+          <label for="confirm-agree" class="ml-2 text-xs text-slate-700 font-medium">I confirm my availability to speak at VIP Event Centre on this date.</label>
+        </div>
+        <button type="submit" class="w-full sm:w-auto px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl text-sm shadow-md transition flex items-center justify-center">
+          <i data-lucide="check-circle" class="w-4 h-4 mr-2"></i> Confirm & Submit Details
+        </button>
+      </div>
+    </form>
+
+    <!-- Success Confirmation State (Hidden until submitted) -->
+    <div id="success-state" class="hidden p-6 rounded-2xl bg-emerald-50 border border-emerald-200 text-center space-y-3">
+      <div class="w-12 h-12 rounded-full bg-emerald-100 text-emerald-600 mx-auto flex items-center justify-center">
+        <i data-lucide="party-popper" class="w-6 h-6"></i>
+      </div>
+      <h3 class="text-lg font-bold text-emerald-900">Thank You, Joy Okoye!</h3>
+      <p class="text-xs sm:text-sm text-emerald-700 max-w-md mx-auto">
+        Your speaker details and confirmation have been received by UpNestor Studio. The media team has been notified to produce your promotional flyer!
+      </p>
+      <div class="pt-2">
+        <a href="https://maps.google.com/?q=VIP+Event+Centre+Enugu+Nigeria" target="_blank" class="inline-flex items-center px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-lg text-xs transition">
+          <i data-lucide="map-pin" class="w-3.5 h-3.5 mr-1.5"></i> Save Venue Location (VIP Event Centre)
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="max-w-2xl mx-auto w-full text-center text-xs text-slate-400 mt-6">
+    Powered by UpNestor EventOps AI • Teen Think Innovation (TTI) Summit 2026
+  </footer>
+
+  <script>
+    lucide.createIcons();
+
+    // Check URL parameters to customize speaker details dynamically
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('speaker')) {
+      const name = params.get('speaker');
+      document.getElementById('sp-name').value = name;
+      document.getElementById('sp-social').value = '@' + name.toLowerCase().replace(/[\s.]+/g, '_');
+    }
+    if (params.get('topic')) {
+      document.getElementById('display-topic').innerText = 'Topic: ' + params.get('topic');
+    }
+
+    function handleSpeakerSubmission(e) {
+      e.preventDefault();
+      document.getElementById('speaker-form').classList.add('hidden');
+      document.getElementById('success-state').classList.remove('hidden');
+      lucide.createIcons();
+    }
+  </script>
+</body>
+</html>
